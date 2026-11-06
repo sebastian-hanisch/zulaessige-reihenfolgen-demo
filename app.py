@@ -110,6 +110,19 @@ die Schranke für die Zahl der Ideale kommt aus der Kettenzerlegung von Stück 6
 """
 )
 
+# erklaerseite:einfach:start (erzeugt von tools/set_demo_explainer.py (Website-Repo) aus tools/content/explainers/zulaessige-reihenfolgen-erklaert.json, nicht von Hand ändern)
+with st.expander("💬 In einfachen Worten"):
+    st.markdown(
+        """
+Ein Plan besteht aus Aufgaben und Vorgaben der Form „A vor B“. Eine **zulässige Reihenfolge** erledigt alle Aufgaben nacheinander und hält jede Vorgabe ein. Ihre Zahl zeigt, wie viel Spielraum der Plan lässt: Eine Kette lässt genau eine Reihenfolge zu, lauter freie Aufgaben lassen jede Anordnung zu.
+
+Gezählt wird nicht über alle Anordnungen, sondern über die **Zwischenstände** (Fachwort: Ideale), die erlaubten Auswahlen fertiger Aufgaben. Dieselbe Tabelle erlaubt, eine Reihenfolge fair auszulosen. Der naheliegende Zufall, in jedem Schritt irgendeine erlaubte Aufgabe zu nehmen, ist dagegen verzerrt. Bei lockeren Plänen mit vielen freien Aufgaben wird das Zählen zu teuer, dann bleiben ein Schätzer und ein Mischverfahren.
+
+[Ausführlich und verständlich erklärt, mit Fachteil](https://sebastianhanisch.net/zulaessige-reihenfolgen-erklaert.html)
+        """
+    )
+# erklaerseite:einfach:end
+
 with st.expander("So zählt und zieht man zulässige Reihenfolgen", expanded=True):
     st.markdown(
         """
@@ -328,6 +341,24 @@ st.markdown(
 st.markdown("---")
 
 with st.expander("📐 Mathematische Formulierung"):
+    # erklaerseite:lesehilfe:start (erzeugt von tools/set_demo_explainer.py (Website-Repo) aus tools/content/explainers/zulaessige-reihenfolgen-erklaert.json, nicht von Hand ändern)
+    st.markdown(
+        r"""
+**Lesehilfe.** Gegeben ist ein kreisfreier Plan $P$ aus $n$ Aufgaben mit Beziehungen „$a$ vor $b$“. Gesucht ist die Zahl $e(P)$ der zulässigen Reihenfolgen und ein Weg, eine davon gleichverteilt zu ziehen, auch wenn sich nicht mehr zählen lässt.
+
+| Symbol | Bedeutung |
+|---|---|
+| $e(P)$ | Zahl der zulässigen Reihenfolgen (lineare Erweiterungen) des Plans |
+| $\mathcal{I}(P)$ | Menge der Ideale: Aufgabenmengen, die mit jeder Aufgabe ihre Vorgänger enthalten |
+| $f(I)$ | Zahl der Wege vom leeren Ideal zum Ideal $I$ |
+| $g(I)$ | Zahl der Fortsetzungen von $I$ bis zur vollen Aufgabenmenge $V$ |
+| $d_t$ | Zahl der Aufgaben, die im Schritt $t$ zur Wahl stehen |
+| $\ell_k$ | Länge der $k$-ten Kette in einer Zerlegung des Plans in $w$ Ketten |
+
+[Schritt für Schritt erklärt, mit Herleitung und Literatur](https://sebastianhanisch.net/zulaessige-reihenfolgen-erklaert.html#fachleute)
+        """
+    )
+    # erklaerseite:lesehilfe:end
     st.markdown(
         r"""
 **Gegeben** eine endliche Ordnung $(V, \preceq)$ aus den Aufgaben; eine **zulässige Reihenfolge** (lineare Erweiterung) ist eine Anordnung $\sigma$ aller Aufgaben mit $a \prec b \Rightarrow \sigma(a) < \sigma(b)$.
