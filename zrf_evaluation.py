@@ -270,7 +270,7 @@ def verdict_bound(rows: list[dict]) -> tuple[str, str]:
 def verdict_naive(row: dict) -> tuple[str, str]:
     """E4: naiver Zufalls-Kahn gegen gleichverteilt."""
     text = (f"Beim naiven Zufalls-Kahn (an jeder Stelle gleichverteilt eine verfügbare Aufgabe) ist die wahrscheinlichste Reihenfolge im Median das {_i(row['ratio_median'])}-Fache der unwahrscheinlichsten "
-            f"(höchstens das {_i(row['ratio_max'])}-Fache); der Abstand zur Gleichverteilung (Totalvariation) beträgt im Median {_dec(row['tv_median'], 2)}.")
+            f"(höchstens das {_i(row['ratio_max'])}-Fache); der Abstand zur Gleichverteilung (Totalvariationsabstand) beträgt im Median {_dec(row['tv_median'], 2)}.")
     return ("info" if row["ratio_median"] > 1 else "warning"), text
 
 
@@ -286,7 +286,7 @@ def verdict_mixing(rows: list[dict]) -> tuple[str, str]:
     steps = " / ".join(_i(r["steps"]) for r in rows)
     tvs = " / ".join(_dec(r["tv"], 2) for r in rows)
     first_ok = next((r["steps"] for r in rows if r["tv"] < 0.1), None)
-    text = (f"Bei {_i(rows[0]['n'])} Aufgaben und {_i(rows[0]['extensions'])} Reihenfolgen liegt der Abstand des Kettenverfahrens zur Gleichverteilung nach {steps} Schritten bei {tvs} (Totalvariation, {_i(rows[0]['runs'])} Läufe je Schrittzahl). "
+    text = (f"Bei {_i(rows[0]['n'])} Aufgaben und {_i(rows[0]['extensions'])} Reihenfolgen liegt der Abstand des Kettenverfahrens zur Gleichverteilung nach {steps} Schritten bei {tvs} (Totalvariationsabstand, {_i(rows[0]['runs'])} Läufe je Schrittzahl). "
             + (f"Unter 0,1 ist er erstmals nach {_i(first_ok)} Schritten." if first_ok else "Unter 0,1 kommt er in diesem Raster nicht."))
     return ("info" if rows[0]["tv"] > rows[-1]["tv"] and first_ok else "warning"), text
 

@@ -180,7 +180,7 @@ def build_mixing_figure(rows):
     fig = go.Figure(go.Scatter(x=[r["steps"] for r in rows], y=[r["tv"] for r in rows], mode="lines+markers", line=dict(color=C.COLOR_BAR), marker=dict(size=9), showlegend=False))
     fig.add_hline(y=0.1, line_dash="dot", line_color="rgba(128,128,128,0.8)", annotation_text="0,1", annotation_position="top right")
     fig.update_xaxes(title_text="Schritte des Kettenverfahrens (logarithmisch)", type="log")
-    fig.update_yaxes(title_text="Abstand zur Gleichverteilung (Totalvariation)", rangemode="tozero")
+    fig.update_yaxes(title_text="Abstand zur Gleichverteilung (Totalvariationsabstand)", rangemode="tozero")
     return _base(fig, 330)
 
 

@@ -131,7 +131,7 @@ with st.expander("So zählt und zieht man zulässige Reihenfolgen", expanded=Tru
 3. **Gleichverteilt ziehen:** Aus dem aktuellen Ideal wählt man die nächste Aufgabe mit Wahrscheinlichkeit (Fortsetzungen danach) / (Fortsetzungen jetzt). Dann hat jede Reihenfolge dieselbe Wahrscheinlichkeit 1 / (Zahl der Reihenfolgen).
 4. **Naiver Zufalls-Kahn:** An jeder Stelle gleichverteilt eine der verfügbaren Aufgaben nehmen. Das ist einfach, aber verzerrt: Reihenfolgen durch Stellen mit wenigen Alternativen werden bevorzugt.
 5. **Schätzer:** Das Produkt der Zahl der verfügbaren Aufgaben längs einer naiven Zufallsordnung hat als Erwartungswert genau die Zahl der Reihenfolgen. Es streut stark, rechnet aber auch dort, wo die Tabelle zu groß wird.
-6. **Kettenverfahren:** Man startet mit einer zulässigen Reihenfolge und vertauscht immer wieder zufällig zwei benachbarte Aufgaben, wenn keine von der anderen abhängt. Nach genug Schritten ist die Reihenfolge nahezu gleichverteilt; wie viele Schritte genug sind, misst die Demo.
+6. **Kettenverfahren (Markov-Kette auf den zulässigen Reihenfolgen):** Man startet mit einer zulässigen Reihenfolge und vertauscht immer wieder zufällig zwei benachbarte Aufgaben, wenn keine von der anderen abhängt. Nach genug Schritten ist die Reihenfolge nahezu gleichverteilt; wie viele Schritte genug sind, misst die Demo.
 7. **Spielraum:** Die früheste Stelle einer Aufgabe ist die Zahl ihrer Vorgänger plus eins, die späteste n minus die Zahl ihrer Nachfolger. Eine neue Beziehung „A vor B“ lässt genau den Anteil der Reihenfolgen übrig, in denen A ohnehin vor B steht.
 
 | Begriff | Bedeutung |
@@ -141,7 +141,7 @@ with st.expander("So zählt und zieht man zulässige Reihenfolgen", expanded=Tru
 | **Spielraum** | Zahl der zulässigen Reihenfolgen, oder je Aufgabe die Spanne ihrer möglichen Stellen |
 | **#P-vollständig** | Das Zählen ist so schwer wie das Zählen aller Lösungen eines NP-Problems |
 | **Gleichverteilt** | Jede zulässige Reihenfolge kommt mit derselben Wahrscheinlichkeit vor |
-| **Totalvariation** | Halbe Summe der Abweichungen zweier Verteilungen: 0 gleich, 1 völlig verschieden |
+| **Totalvariationsabstand** | Halbe Summe der Abweichungen zweier Verteilungen: 0 gleich, 1 völlig verschieden |
         """
     )
 
@@ -230,7 +230,7 @@ with tab_draw:
         if dist["exact"] is not None:
             tv = ev.tv_distance(dist["exact"], dist["sampled"])
             d1, d2 = st.columns(2)
-            d1.metric("Abstand zur Gleichverteilung (Stelle der Aufgabe)", _dec(tv, 2), delta="Totalvariation, gezogen gegen exakt", delta_color="inverse")
+            d1.metric("Abstand zur Gleichverteilung (Stelle der Aufgabe)", _dec(tv, 2), delta="Totalvariationsabstand, gezogen gegen exakt", delta_color="inverse")
             if a.naive_ratio is not None:
                 d2.metric("Naiver Zufalls-Kahn: wahrscheinlichste / unwahrscheinlichste", f"{_dec(a.naive_ratio)}-fach", delta="exakt gerechnet (kleine Pläne)", delta_color="off")
         st.plotly_chart(build_position_figure(dist["exact"], dist["sampled"], C.SAMPLER_NAMES[a.sampler_used]), width="stretch", key="chart_positions")

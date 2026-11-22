@@ -97,7 +97,7 @@ def test_naive_names_the_ratios_and_the_distance():
     row = {"n": 9, "out": 1.5, "instances": 20, "ratio_median": 102.0, "ratio_max": 432.0, "tv_median": 0.4942}
     kind, text = ev.verdict_naive(row)
     assert kind == "info"
-    assert "im Median das 102-Fache der unwahrscheinlichsten (höchstens das 432-Fache); der Abstand zur Gleichverteilung (Totalvariation) beträgt im Median 0,49." in text
+    assert "im Median das 102-Fache der unwahrscheinlichsten (höchstens das 432-Fache); der Abstand zur Gleichverteilung (Totalvariationsabstand) beträgt im Median 0,49." in text
     assert ev.verdict_naive({**row, "ratio_median": 1.0})[0] == "warning"
 
 
@@ -126,7 +126,7 @@ def test_mixing_names_the_distances_and_the_first_step_count_below_a_tenth():
     kind, text = ev.verdict_mixing(rows)
     assert kind == "info"
     assert ("Bei 7 Aufgaben und 18 Reihenfolgen liegt der Abstand des Kettenverfahrens zur Gleichverteilung nach 7 / 20 / 49 / 100 / 200 / 400 Schritten bei 0,64 / 0,44 / 0,24 / 0,07 / 0,03 / 0,04 "
-            "(Totalvariation, 3.000 Läufe je Schrittzahl). Unter 0,1 ist er erstmals nach 100 Schritten.") in text
+            "(Totalvariationsabstand, 3.000 Läufe je Schrittzahl). Unter 0,1 ist er erstmals nach 100 Schritten.") in text
     kind2, text2 = ev.verdict_mixing([_m(7, 0.6), _m(20, 0.4)])
     assert kind2 == "warning" and "Unter 0,1 kommt er in diesem Raster nicht." in text2
     assert ev.verdict_mixing([_m(7, 0.1), _m(20, 0.6)])[0] == "warning"
